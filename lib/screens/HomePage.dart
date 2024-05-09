@@ -11,6 +11,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List menuItems = [
+    "New Group",
+    "New Broadcast",
+    "Linked devices",
+    "Starred message",
+    "Payment",
+    "Settings"
+  ];
   List chats = [
     {
       "name": "Ram",
@@ -70,14 +78,42 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: const Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("What's UP"),
               Row(
                 children: [
                   Icon(Icons.search),
-                  Icon(Icons.more_vert),
+                  PopupMenuButton<String>(
+                      onSelected: (value) => {print(value)},
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                            PopupMenuItem(
+                              value: "New Group",
+                              child: Text("New Group"),
+                            ),
+                            PopupMenuItem(
+                              value: "New Broadcast",
+                              child: Text("New Broadcast"),
+                            ),
+                            PopupMenuItem(
+                              value: "Linked devices",
+                              child: Text("Linked devices"),
+                            ),
+                            PopupMenuItem(
+                              value: "Starred message",
+                              child: Text("Starred message"),
+                            ),
+                            PopupMenuItem(
+                              value: "Payment",
+                              child: Text("Payment"),
+                            ),
+                            PopupMenuItem(
+                              value: "Settings",
+                              child: Text("Settings"),
+                            ),
+                          ])
                 ],
               ),
             ],
