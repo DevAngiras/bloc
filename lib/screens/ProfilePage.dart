@@ -18,7 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: Image(image: AssetImage(widget.image),),
+            child: Image(image: AssetImage(widget.image)),
           ),
           title: Text(widget.name),
         )
@@ -29,8 +29,8 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child:Image(image: AssetImage(widget.image),),
+                borderRadius: BorderRadius.circular(90),
+                child:Image(image: AssetImage(widget.image),height: 160,),
               ),
             ],
           ),
