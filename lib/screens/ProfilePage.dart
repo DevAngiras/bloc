@@ -18,11 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: ListTile(
           leading: ClipRRect(
             borderRadius: BorderRadius.circular(50),
-            child: Image.network(
-              widget.image,
-              height: 40,
-              width: 40,
-            ),
+            child: Image(image: AssetImage(widget.image),),
           ),
           title: Text(widget.name),
         )
@@ -34,11 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  widget.image,
-                  height: 100,
-                  width: 100,
-                ),
+                child:Image(image: AssetImage(widget.image),),
               ),
             ],
           ),
@@ -46,13 +38,13 @@ class _ProfilePageState extends State<ProfilePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(widget.name,
-              style: TextStyle(fontSize: 30,),),
+              style: const TextStyle(fontSize: 30,),),
             ],
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("+91 92649 59384",
+              Text("+91 12345 67890",
               style: TextStyle(fontSize: 30,),),
             ],
           ),
