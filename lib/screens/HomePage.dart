@@ -73,7 +73,79 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _buildheader() {
+      return DrawerHeader(
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 43, 43, 43),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage("assets/user.png"),
+            ),
+            SizedBox(height: 20),
+            Text("Welcome [User Name]!",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w400))
+          ],
+        ),
+      );
+    }
+
+    _buildItem(
+        {required IconData icon,
+        required String title,
+        required GestureTapCallback onTap}) {
+      return ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        onTap: onTap,
+        // minLeadingWidth: Material.defaultSplashRadius,
+      );
+    }
+
     return Scaffold(
+        drawer: Drawer(
+            child: ListView(
+          children: [
+            _buildheader(),
+            Column(
+              children: [
+                _buildItem(
+                    icon: Icons.person,
+                    title: "Profile",
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()))),
+                _buildItem(
+                    icon: Icons.dark_mode_rounded,
+                    title: "Theme",
+                    onTap: () => Navigator.pushNamed(context, "Theme")),
+                _buildItem(
+                    icon: Icons.backup,
+                    title: "Chat Backup",
+                    onTap: () => Navigator.pushNamed(context, "Chat Backup")),
+                _buildItem(
+                    icon: Icons.settings,
+                    title: "Settings",
+                    onTap: () => Navigator.pushNamed(context, "Settings")),
+                _buildItem(
+                    icon: Icons.signal_wifi_connected_no_internet_4,
+                    title: "Proxy",
+                    onTap: () => Navigator.pushNamed(context, "Proxy")),
+              ],
+            ),
+            SizedBox(height: 50),
+            Container(
+              child: _buildItem(
+                  icon: Icons.logout,
+                  title: "Log Out",
+                  onTap: () =>
+                      Navigator.pushNamed(context, "Logging out Page")),
+            )
+          ],
+        )),
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           // Here we take the value from the MyHomePage object that was created by
