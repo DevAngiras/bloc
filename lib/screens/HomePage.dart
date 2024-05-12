@@ -74,56 +74,64 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("What's UP"),
-              Row(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: AppBar(
+              iconTheme: IconThemeData(color: Colors.white),
+              backgroundColor: Theme.of(context).primaryColor,
+              // Here we take the value from the MyHomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.search),
-                  PopupMenuButton<String>(
-                      onSelected: (value) => {print(value)},
-                      itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<String>>[
-                            PopupMenuItem(
-                              value: "New Group",
-                              child: Text("New Group"),
-                            ),
-                            PopupMenuItem(
-                              value: "New Broadcast",
-                              child: Text("New Broadcast"),
-                            ),
-                            PopupMenuItem(
-                              value: "Linked devices",
-                              child: Text("Linked devices"),
-                            ),
-                            PopupMenuItem(
-                              value: "Starred message",
-                              child: Text("Starred message"),
-                            ),
-                            PopupMenuItem(
-                              value: "Payment",
-                              child: Text("Payment"),
-                            ),
-                            PopupMenuItem(
-                              value: "Settings",
-                              child: Text("Settings"),
-                            ),
-                          ])
+                  Text("WhatsApp",
+                      style: Theme.of(context).textTheme.headline1),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.search,
+                        color: Theme.of(context).iconTheme.color,
+                      ),
+                      PopupMenuButton<String>(
+                          onSelected: (value) => {print(value)},
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                                PopupMenuItem(
+                                  value: "New Group",
+                                  child: Text("New Group"),
+                                ),
+                                PopupMenuItem(
+                                  value: "New Broadcast",
+                                  child: Text("New Broadcast"),
+                                ),
+                                PopupMenuItem(
+                                  value: "Linked devices",
+                                  child: Text("Linked devices"),
+                                ),
+                                PopupMenuItem(
+                                  value: "Starred message",
+                                  child: Text("Starred message"),
+                                ),
+                                PopupMenuItem(
+                                  value: "Payment",
+                                  child: Text("Payment"),
+                                ),
+                                PopupMenuItem(
+                                  value: "Settings",
+                                  child: Text("Settings"),
+                                ),
+                              ])
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
+            )),
         body: ListView.builder(
             itemCount: chats.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(chats[index]["name"]),
+                title: Text(chats[index]["name"],
+                    style: Theme.of(context).textTheme.headline2),
                 subtitle: chats[index]["sent"]
                     ? Row(
                         children: [
