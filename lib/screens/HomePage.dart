@@ -3,6 +3,61 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
 
+import 'dart:async';
+import 'package:flutter/material.dart';
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 5), () => navigateToHome());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Color(0xFF075E54), // WhatsApp green color
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/whatsapp_logo.png'), // Replace with your logo path
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Text(
+                  'WhatsApp',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void navigateToHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => YourHomePage()), // Replace with your home page widget
+    );
+  }
+}
+
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
