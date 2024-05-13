@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:test_app/screens/ChatPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -119,42 +120,92 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: ListView.builder(
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(chats[index]["name"]),
-                subtitle: chats[index]["sent"]
-                    ? Row(
-                        children: [
-                          const Icon(Icons.done_all),
-                          Text(
-                            chats[index]["Message"],
-                            style: const TextStyle(
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      )
-                    : Text(
-                        chats[index]["Message"],
-                        style: const TextStyle(overflow: TextOverflow.ellipsis),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 0.2, horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: Colors.red,
+                        elevation: 2,
+                        backgroundColor: Color.fromARGB(19, 11, 11, 11)),
+                    onPressed: () {},
+                    child: Text(
+                      "All",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: Colors.red,
+                        elevation: 2,
+                        backgroundColor: Color.fromARGB(19, 11, 11, 11)),
+                    onPressed: () {},
+                    child: Text(
+                      "Unread",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        foregroundColor: Colors.red,
+                        elevation: 2,
+                        backgroundColor: Color.fromARGB(19, 11, 11, 11)),
+                    onPressed: () {},
+                    child: Text(
+                      "Groups",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: ListView.builder(
+                  itemCount: chats.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(chats[index]["name"]),
+                      subtitle: chats[index]["sent"]
+                          ? Row(
+                              children: [
+                                const Icon(Icons.done_all),
+                                Text(
+                                  chats[index]["Message"],
+                                  style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              chats[index]["Message"],
+                              style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: index % 2 == 0
+                            ? Image.asset("assets/srk.png")
+                            : Image.asset("assets/srk1.png"),
                       ),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: index % 2 == 0
-                      ? Image.asset("assets/srk.png")
-                      : Image.asset("assets/srk1.png"),
-                ),
-                trailing: Text(chats[index]["time"]),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                  return ChatPage(
-                    name: chats[index]["name"],
-                    image:
-                        index % 2 == 0 ? "assets/srk.png" : "assets/srk1.png",
-                  );
-                })),
-              );
-            }));
+                      trailing: Text(chats[index]["time"]),
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ChatPage(
+                          name: chats[index]["name"],
+                          image: index % 2 == 0
+                              ? "assets/srk.png"
+                              : "assets/srk1.png",
+                        );
+                      })),
+                    );
+                  }),
+            ),
+          ],
+        ));
   }
 }
