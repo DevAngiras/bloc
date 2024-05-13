@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:test_app/screens/ChatPage.dart';
+import 'package:looper/screens/ChatPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("What's UP"),
+              const Text("Looper"),
               Row(
                 children: [
                   Icon(Icons.search),
@@ -89,27 +89,27 @@ class _HomePageState extends State<HomePage> {
                       onSelected: (value) => {print(value)},
                       itemBuilder: (BuildContext context) =>
                           <PopupMenuEntry<String>>[
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "New Group",
                               child: Text("New Group"),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "New Broadcast",
                               child: Text("New Broadcast"),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "Linked devices",
                               child: Text("Linked devices"),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "Starred message",
                               child: Text("Starred message"),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "Payment",
                               child: Text("Payment"),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "Settings",
                               child: Text("Settings"),
                             ),
