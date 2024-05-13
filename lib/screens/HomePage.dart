@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
               const Text("Looper"),
               Row(
                 children: [
-                  Icon(Icons.search),
+                  const Icon(Icons.search),
                   PopupMenuButton<String>(
                       onSelected: (value) => {print(value)},
                       itemBuilder: (BuildContext context) =>

@@ -21,6 +21,19 @@ class _ChatPageState extends State<ChatPage> {
     });
   }
 
+  void _sendMessage() {
+    String message = _messageController.text.trim();
+    if (message.isNotEmpty) {
+      messages.add({"message": message, "sent": true});
+      _messageController.clear();
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeIn,
+      );
+    }
+  }
+
   List<Map> messages = [
     {
       "message": "Hola!",
