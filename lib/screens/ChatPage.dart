@@ -136,44 +136,75 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-            controller: _scrollController,
-            itemCount: messages.length,
-            itemBuilder: (context, index) {
-              int previous = index - 1 >= 0 ? index - 1 : 0;
-              int current = index;
-              return Padding(
-                padding: messages[previous]["sent"] == messages[current]["sent"]
-                    ? const EdgeInsets.only(left: 8, right: 8, top: 4)
-                    : const EdgeInsets.only(left: 8, right: 8, top: 8),
-                child: Align(
-                  alignment: messages[index]["sent"]
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: messages[index]["sent"]
-                          ? Colors.amber[200]
-                          : Colors.blue[200],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8,
-                        ),
-                        child: Text(
-                          messages[index]["message"],
-                          style: const TextStyle(fontSize: 18),
+        padding: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  controller: _scrollController,
+                  itemCount: messages.length,
+                  itemBuilder: (context, index) {
+                    int previous = index - 1 >= 0 ? index - 1 : 0;
+                    int current = index;
+                    return Padding(
+                      padding: messages[previous]["sent"] ==
+                              messages[current]["sent"]
+                          ? const EdgeInsets.only(left: 8, right: 8, top: 4)
+                          : const EdgeInsets.only(left: 8, right: 8, top: 8),
+                      child: Align(
+                        alignment: messages[index]["sent"]
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: messages[index]["sent"]
+                                ? Colors.amber[200]
+                                : Colors.blue[200],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width * 0.8,
+                              ),
+                              child: Text(
+                                messages[index]["message"],
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 7, 0, 0),
+                      child: TextField(
+                        controller: _messageController,
+                        decoration: InputDecoration(
+                          hintText: "Message",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      )),
                 ),
-              );
-            }),
+                IconButton(
+                  icon: const Icon(Icons.send_rounded),
+                  onPressed: () {
+                    _sendMessage();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
