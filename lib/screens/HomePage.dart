@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/utility/popupmenu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,14 +12,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List menuItems = [
-    "New Group",
+  List popupMenuList = [
+    "New group",
     "New Broadcast",
     "Linked devices",
     "Starred message",
     "Payment",
     "Settings"
   ];
+
   List chats = [
     {
       "name": "Ram",
@@ -85,35 +87,7 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   Icon(Icons.search),
-                  PopupMenuButton<String>(
-                      onSelected: (value) => {print(value)},
-                      itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<String>>[
-                            PopupMenuItem(
-                              value: "New Group",
-                              child: Text("New Group"),
-                            ),
-                            PopupMenuItem(
-                              value: "New Broadcast",
-                              child: Text("New Broadcast"),
-                            ),
-                            PopupMenuItem(
-                              value: "Linked devices",
-                              child: Text("Linked devices"),
-                            ),
-                            PopupMenuItem(
-                              value: "Starred message",
-                              child: Text("Starred message"),
-                            ),
-                            PopupMenuItem(
-                              value: "Payment",
-                              child: Text("Payment"),
-                            ),
-                            PopupMenuItem(
-                              value: "Settings",
-                              child: Text("Settings"),
-                            ),
-                          ])
+                  MyPopUpMenuButton(menuList: popupMenuList)
                 ],
               ),
             ],

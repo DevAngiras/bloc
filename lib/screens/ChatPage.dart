@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:test_app/utility/popupmenu.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.name, required this.image});
@@ -11,6 +12,14 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final List popUpMenuItems = [
+    "View contact",
+    "Media,Docs,Links",
+    "search",
+    "Mute notifications",
+    "Disappearing messages",
+    "more"
+  ];
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
@@ -109,13 +118,13 @@ class _ChatPageState extends State<ChatPage> {
           title: Text(widget.name),
           subtitle: const Text("Online"),
           trailing: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.2,
-            child: const Row(
+            width: MediaQuery.of(context).size.width * 0.235,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(Icons.video_call),
                 Icon(Icons.call),
-                Icon(Icons.more_vert),
+                MyPopUpMenuButton(menuList: popUpMenuItems)
               ],
             ),
           ),
