@@ -25,49 +25,56 @@ class _HomePageState extends State<HomePage> {
       "Message": "I have reached Lanka",
       "time": "11:11",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Lakshman",
       "Message": "Bhrata, mujhe aadesh dein, sabko mai akele maar dunga!",
       "time": "11:11",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Bharat",
       "Message": "Kila fateh karke aaiye! Rajya aapka intezar kar raha hai!",
       "time": "11:15",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Shatrughna",
       "Message": "ALl the best bhrata shree!",
       "time": "11:12",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Hanuman",
       "Message": "Jai Shree Ram. On your command, my lord!",
       "time": "11:11",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Sita",
       "Message": "I am waiting, Come soon!",
       "time": "11:11",
       "readStatus": true,
-      "sent": false
+      "sent": false,
+      "blocked": false
     },
     {
       "name": "Dashrath",
       "Message": "All the best!",
       "time": "11:20",
       "readStatus": true,
-      "sent": true
+      "sent": true,
+      "blocked": false
     },
   ];
 
@@ -88,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   PopupMenuButton<String>(
                       onSelected: (value) => {print(value)},
                       itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<String>>[
+                          const <PopupMenuEntry<String>>[
                             PopupMenuItem(
                               value: "New Group",
                               child: Text("New Group"),
