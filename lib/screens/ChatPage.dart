@@ -12,6 +12,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final ScrollController _scrollController = ScrollController();
+  bool blocked = false;
   @override
   void initState() {
     super.initState();
@@ -95,6 +96,12 @@ class _ChatPageState extends State<ChatPage> {
     },
   ];
 
+  void toggleBlockStatus() {
+    setState(() {
+      blocked = !blocked;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,9 +117,13 @@ class _ChatPageState extends State<ChatPage> {
           subtitle: const Text("Online"),
           trailing: SizedBox(
             width: MediaQuery.of(context).size.width * 0.2,
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                IconButton(
+                  icon: Icon(blocked ? Icons.block : Icons.block_rounded),
+                  onPressed: toggleBlockStatus,
+                ),
                 Icon(Icons.video_call),
                 Icon(Icons.call),
                 Icon(Icons.more_vert),
@@ -123,43 +134,69 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-            controller: _scrollController,
-            itemCount: messages.length,
-            itemBuilder: (context, index) {
-              int previous = index - 1 >= 0 ? index - 1 : 0;
-              int current = index;
-              return Padding(
-                padding: messages[previous]["sent"] == messages[current]["sent"]
-                    ? const EdgeInsets.only(left: 8, right: 8, top: 4)
-                    : const EdgeInsets.only(left: 8, right: 8, top: 8),
-                child: Align(
-                  alignment: messages[index]["sent"]
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: messages[index]["sent"]
-                          ? Colors.amber[200]
-                          : Colors.blue[200],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width * 0.8,
+        child: Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.8,
+              child: ListView.builder(
+                controller: _scrollController,
+                itemCount: messages.length,
+                itemBuilder: (context, index) {
+                  int previous = index - 1 >= 0 ? index - 1 : 0;
+                  int current = index;
+                  return Padding(
+                    padding:
+                        messages[previous]["sent"] == messages[current]["sent"]
+                            ? const EdgeInsets.only(left: 8, right: 8, top: 4)
+                            : const EdgeInsets.only(left: 8, right: 8, top: 8),
+                    child: Align(
+                      alignment: messages[index]["sent"]
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: messages[index]["sent"]
+                              ? Colors.amber[200]
+                              : Colors.blue[200],
                         ),
-                        child: Text(
-                          messages[index]["message"],
-                          style: const TextStyle(fontSize: 18),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.8,
+                            ),
+                            child: Text(
+                              messages[index]["message"],
+                              style: const TextStyle(fontSize: 18),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-              );
-            }),
+                  );
+                },
+              ),
+            ),
+            blocked
+                ? Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 114, 164, 169),
+                        borderRadius: BorderRadius.circular(10)),
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    padding: EdgeInsets.all(8),
+                    child: Center(
+                      child: Text(
+                        "You blocked this contact",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  )
+                : SizedBox(
+                    height: 0,
+                  )
+          ],
+        ),
       ),
     );
   }
