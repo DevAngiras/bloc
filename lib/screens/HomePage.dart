@@ -139,11 +139,43 @@ class _HomePageState extends State<HomePage> {
                         chats[index]["Message"],
                         style: const TextStyle(overflow: TextOverflow.ellipsis),
                       ),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: index % 2 == 0
-                      ? Image.asset("assets/srk.png")
-                      : Image.asset("assets/srk1.png"),
+                leading: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Container(
+                            width: double.maxFinite,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(index % 2 == 0
+                                    ? "assets/srk.png"
+                                    : "assets/srk1.png"),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          actions: [
+                            Center(
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Icon(Icons.close),
+                              ),
+                            )
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset(
+                        index % 2 == 0 ? "assets/srk.png" : "assets/srk1.png"),
+                  ),
                 ),
                 trailing: Text(chats[index]["time"]),
                 onTap: () => Navigator.push(context,
