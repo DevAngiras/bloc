@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/qr_scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -84,6 +85,15 @@ class _HomePageState extends State<HomePage> {
               Text("What's UP"),
               Row(
                 children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ScanQRcode()));
+                      });
+                    },
+                    icon: const Icon(Icons.qr_code),
+                  ),
                   Icon(Icons.search),
                   PopupMenuButton<String>(
                       onSelected: (value) => {print(value)},
