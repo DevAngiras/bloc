@@ -5,7 +5,10 @@ gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
-
+web/favicon.png
+ web/icons/Icon-192.png
+web/icons/Icon-512.png
+ web/icons/Icon-maskable-192.png
 # Remember to never publicly share your keystore.
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 key.properties
