@@ -85,10 +85,6 @@ class _HomePageState extends State<HomePage> {
               Text("What's UP"),
               Row(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(Icons.search),
-                  ),
                   IconButton(
                     onPressed: () {
                       setState(() {
