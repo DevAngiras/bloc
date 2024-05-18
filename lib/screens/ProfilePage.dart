@@ -520,7 +520,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Text(
                               widget.name,
                               style: const TextStyle(
-                                  fontSize: 18, color: Colors.red),
+                                  fontSize: 17, color: Colors.red),
                             ),
                           ),
                         ],
