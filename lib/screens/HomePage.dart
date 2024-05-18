@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/NewGroup.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,6 +93,11 @@ class _HomePageState extends State<HomePage> {
                             PopupMenuItem(
                               value: "New Group",
                               child: Text("New Group"),
+                                onTap: () => Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => NewGroup()
+
+                                    )
+                                )
                             ),
                             PopupMenuItem(
                               value: "New Broadcast",
