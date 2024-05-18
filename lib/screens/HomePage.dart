@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/GroupPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -119,42 +120,58 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: ListView.builder(
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(chats[index]["name"]),
-                subtitle: chats[index]["sent"]
-                    ? Row(
-                        children: [
-                          const Icon(Icons.done_all),
-                          Text(
+        body: Column(
+          children: [
+            ListView.builder(
+                itemCount: chats.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(chats[index]["name"]),
+                    subtitle: chats[index]["sent"]
+                        ? Row(
+                            children: [
+                              const Icon(Icons.done_all),
+                              Text(
+                                chats[index]["Message"],
+                                style: const TextStyle(
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            ],
+                          )
+                        : Text(
                             chats[index]["Message"],
                             style: const TextStyle(
                                 overflow: TextOverflow.ellipsis),
                           ),
-                        ],
-                      )
-                    : Text(
-                        chats[index]["Message"],
-                        style: const TextStyle(overflow: TextOverflow.ellipsis),
-                      ),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: index % 2 == 0
-                      ? Image.asset("assets/srk.png")
-                      : Image.asset("assets/srk1.png"),
-                ),
-                trailing: Text(chats[index]["time"]),
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: index % 2 == 0
+                          ? Image.asset("assets/srk.png")
+                          : Image.asset("assets/srk1.png"),
+                    ),
+                    trailing: Text(chats[index]["time"]),
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ChatPage(
+                        name: chats[index]["name"],
+                        image: index % 2 == 0
+                            ? "assets/srk.png"
+                            : "assets/srk1.png",
+                      );
+                    })),
+                  );
+                }),
+            Row(children: [
+              ListTile(
+                title: Text("Info BVCA"),
+                trailing: Icon(Icons.chevron_right),
                 onTap: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                  return ChatPage(
-                    name: chats[index]["name"],
-                    image:
-                        index % 2 == 0 ? "assets/srk.png" : "assets/srk1.png",
-                  );
+                  return GroupPage();
                 })),
-              );
-            }));
+              ),
+            ])
+          ],
+        ));
   }
 }
