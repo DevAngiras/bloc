@@ -63,5 +63,5 @@ class WhatsAppHomePage extends StatelessWidget {
         },
       ),
     );
-  } // Add the missing closing curly brace here
+  } 
 }
