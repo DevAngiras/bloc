@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'ProfilePage.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.name, required this.image});
@@ -106,7 +107,17 @@ class _ChatPageState extends State<ChatPage> {
             backgroundColor: Colors.white,
             backgroundImage: AssetImage(widget.image),
           ),
-          title: Text(widget.name),
+          title: GestureDetector(
+            onTap: () =>
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ProfilePage(
+              name: widget.name,
+              image: widget.image,
+            );
+          })),
+            // },
+            child: Text(widget.name),
+          ),
           subtitle: const Text("Online"),
           trailing: SizedBox(
             width: MediaQuery.of(context).size.width * 0.2,
