@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/HomePage.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,53 +20,4 @@ class MyApp extends StatelessWidget {
       home: const HomePage(),
     );
   }
-}
-
-class WhatsAppHomePage extends StatelessWidget {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('WhatsApp'),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: Container(
-        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FloatingActionButton(
-              onPressed: () {
-                _scrollController.animateTo(
-                    _scrollController.position.maxScrollExtent,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.fastOutSlowIn);
-              },
-              child: Icon(Icons.arrow_downward_sharp),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                _scrollController.animateTo(
-                    _scrollController.position.minScrollExtent,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.fastOutSlowIn);
-              },
-              child: Icon(Icons.arrow_upward_sharp),
-            )
-          ],
-        ),
-      ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: 7, // Assuming there are 50 chat items
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('Chat $index'),
-          );
-        },
-      ),
-    );
-  } 
 }
