@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/camera.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   List menuItems = [
     "New Group",
     "New Broadcast",
@@ -84,6 +87,23 @@ class _HomePageState extends State<HomePage> {
               Text("What's UP"),
               Row(
                 children: [
+                  IconButton(
+                    onPressed:() async {
+                      WidgetsFlutterBinding.ensureInitialized();
+                      try {
+                         final List cameras = await availableCameras();
+                      print(cameras);
+                      final firstCamera = cameras.first;
+                      
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=>TakePictureScreen(camera: firstCamera))
+                      );
+                      } catch (e) {
+                        print("camera not found ");
+                      }
+                     
+                    },
+                    icon:Icon(Icons.camera_alt),
+                  ),
                   Icon(Icons.search),
                   PopupMenuButton<String>(
                       onSelected: (value) => {print(value)},
