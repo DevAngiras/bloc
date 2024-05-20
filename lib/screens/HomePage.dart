@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/NewContact.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -155,6 +157,16 @@ class _HomePageState extends State<HomePage> {
                   );
                 })),
               );
+            }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return NewContact();
             }));
+        },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
