@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/OtpScreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,6 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+  String countryName = "India";
+  String countryCode = "91";
+  String number = "123456789";
+
+
   List menuItems = [
     "New Group",
     "New Broadcast",
@@ -74,6 +82,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.of(context).pop();
+          Navigator.push(context, MaterialPageRoute(builder: (builder) => OtpScreen(
+            countryCode: countryCode,
+            number: number,)));
+        },
+      backgroundColor: Colors.lightGreenAccent,
+      child: const Icon(Icons.login),),
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           // Here we take the value from the MyHomePage object that was created by
@@ -156,5 +173,6 @@ class _HomePageState extends State<HomePage> {
                 })),
               );
             }));
+
   }
 }
