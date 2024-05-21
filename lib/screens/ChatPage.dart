@@ -106,6 +106,19 @@ class _ChatPageState extends State<ChatPage> {
             backgroundColor: Colors.white,
             backgroundImage: AssetImage(widget.image),
           ),
+          if (chats[index]["isOfficial"] == true) // Display tick mark if the account is official
+      Positioned(
+        bottom: 0,
+        right: 0,
+        child: Container(
+          padding: EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.blue, // You can customize the color
+          ),
+          child: Icon(Icons.verified, color: Colors.white, size: 16),
+        ),
+          
           title: Text(widget.name),
           subtitle: const Text("Online"),
           trailing: SizedBox(
