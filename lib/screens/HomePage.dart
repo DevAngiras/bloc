@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
   List menuItems = [
     "New Group",
@@ -42,25 +41,11 @@ class _HomePageState extends State<HomePage> {
       "sent": false
     },
     {
-      "name": "Shatrughna",
-      "Message": "ALl the best bhrata shree!",
-      "time": "11:12",
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
       "readStatus": true,
-      "sent": false
-    },
-    {
-      "name": "Hanuman",
-      "Message": "Jai Shree Ram. On your command, my lord!",
-      "time": "11:11",
-      "readStatus": true,
-      "sent": false
-    },
-    {
-      "name": "Sita",
-      "Message": "I am waiting, Come soon!",
-      "time": "11:11",
-      "readStatus": true,
-      "sent": false
+      "sent": true
     },
     {
       "name": "Dashrath",
@@ -69,15 +54,83 @@ class _HomePageState extends State<HomePage> {
       "readStatus": true,
       "sent": true
     },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
+    {
+      "name": "Dashrath",
+      "Message": "All the best!",
+      "time": "11:20",
+      "readStatus": false,
+      "sent": false
+    },
   ];
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -119,42 +172,76 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        body: ListView.builder(
-            itemCount: chats.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(chats[index]["name"]),
-                subtitle: chats[index]["sent"]
-                    ? Row(
-                        children: [
-                          const Icon(Icons.done_all),
-                          Text(
-                            chats[index]["Message"],
-                            style: const TextStyle(
-                                overflow: TextOverflow.ellipsis),
-                          ),
-                        ],
-                      )
-                    : Text(
-                        chats[index]["Message"],
-                        style: const TextStyle(overflow: TextOverflow.ellipsis),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                  controller: _scrollController,
+                  itemCount: chats.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(chats[index]["name"]),
+                      subtitle: chats[index]["sent"]
+                          ? Row(
+                              children: [
+                                const Icon(Icons.done_all),
+                                Text(
+                                  chats[index]["Message"],
+                                  style: const TextStyle(
+                                      overflow: TextOverflow.ellipsis),
+                                ),
+                              ],
+                            )
+                          : Text(
+                              chats[index]["Message"],
+                              style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis),
+                            ),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: index % 2 == 0
+                            ? Image.asset("assets/srk.png")
+                            : Image.asset("assets/srk1.png"),
                       ),
-                leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(40),
-                  child: index % 2 == 0
-                      ? Image.asset("assets/srk.png")
-                      : Image.asset("assets/srk1.png"),
+                      trailing: Text(chats[index]["time"]),
+                      onTap: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return ChatPage(
+                          name: chats[index]["name"],
+                          image: index % 2 == 0
+                              ? "assets/srk.png"
+                              : "assets/srk1.png",
+                        );
+                      })),
+                    );
+                  }),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _scrollController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  child: Text("Go to Top"),
                 ),
-                trailing: Text(chats[index]["time"]),
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) {
-                  return ChatPage(
-                    name: chats[index]["name"],
-                    image:
-                        index % 2 == 0 ? "assets/srk.png" : "assets/srk1.png",
-                  );
-                })),
-              );
-            }));
+                ElevatedButton(
+                  onPressed: () {
+                    _scrollController.animateTo(
+                      _scrollController.position.maxScrollExtent,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut,
+                    );
+                  },
+                  child: Text("Go to Bottom"),
+                ),
+              ],
+            ),
+          ],
+        ));
   }
 }
