@@ -26,6 +26,8 @@ class _HomePageState extends State<HomePage> {
       "time": "11:11",
       "readStatus": true,
       "sent": false
+       "isOfficial": true, // Example: Marking Ram as an official account
+  
     },
     {
       "name": "Lakshman",
@@ -33,6 +35,8 @@ class _HomePageState extends State<HomePage> {
       "time": "11:11",
       "readStatus": true,
       "sent": false
+      "isOfficial": true, 
+  
     },
     {
       "name": "Bharat",
@@ -54,6 +58,7 @@ class _HomePageState extends State<HomePage> {
       "time": "11:11",
       "readStatus": true,
       "sent": false
+       "isOfficial": true, 
     },
     {
       "name": "Sita",
@@ -61,6 +66,7 @@ class _HomePageState extends State<HomePage> {
       "time": "11:11",
       "readStatus": true,
       "sent": false
+       "isOfficial": true, 
     },
     {
       "name": "Dashrath",
