@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_app/screens/ChatPage.dart';
+import 'package:test_app/screens/Notificationpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -112,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                             PopupMenuItem(
                               value: "Settings",
                               child: Text("Settings"),
+                              onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage())),
                             ),
                           ])
                 ],
