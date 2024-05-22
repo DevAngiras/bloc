@@ -12,6 +12,8 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   final ScrollController _scrollController = ScrollController();
+  DateTime lastSeen = DateTime.now().subtract(Duration(minutes: 5)); // Example last seen time
+
   @override
   void initState() {
     super.initState();
@@ -95,6 +97,20 @@ class _ChatPageState extends State<ChatPage> {
     },
   ];
 
+  String getLastSeen() {
+    final now = DateTime.now();
+    final difference = now.difference(lastSeen);
+    if (difference.inMinutes < 1) {
+      return "Last seen just now";
+    } else if (difference.inMinutes < 60) {
+      return "Last seen ${difference.inMinutes} mins ago";
+    } else if (difference.inHours < 24) {
+      return "Last seen ${difference.inHours} hrs ago";
+    } else {
+      return "Last seen on ${lastSeen.day}/${lastSeen.month}/${lastSeen.year}";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
             backgroundImage: AssetImage(widget.image),
           ),
           title: Text(widget.name),
-          subtitle: const Text("Online"),
+          subtitle: Text(getLastSeen()),
           trailing: SizedBox(
             width: MediaQuery.of(context).size.width * 0.2,
             child: const Row(
